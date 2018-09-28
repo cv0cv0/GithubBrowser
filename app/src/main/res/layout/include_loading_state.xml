@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="me.gr.githubbrowser.vo.Resource.Status" />
+
+        <variable
+            name="resource"
+            type="me.gr.githubbrowser.vo.Resource" />
+
+        <variable
+            name="retry"
+            type="me.gr.githubbrowser.common.RetryCallback" />
+    </data>
+
+    <LinearLayout
+        isGone="@{resource.data!=null}"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_default">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyle"
+            isGone="@{resource.status==Status.LOADING}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default" />
+
+        <Button
+            android:id="@+id/retry"
+            isGone="@{resource.status==Status.ERROR}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->retry.retry()}"
+            android:text="@string/retry" />
+
+        <TextView
+            android:id="@+id/error_text"
+            isGone="@{resource.status==Status.ERROR}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{resource.message??@string/unknown_error}" />
+    </LinearLayout>
+</layout>
