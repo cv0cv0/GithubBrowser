@@ -1,4 +1,4 @@
-package me.gr.githubbrowser.vo
+package me.gr.githubbrowser.common
 
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
 

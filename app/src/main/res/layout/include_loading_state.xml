@@ -1,48 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
-        <import type="me.gr.githubbrowser.vo.Resource.Status" />
+        <import type="me.gr.githubbrowser.common.Resource" />
 
         <variable
             name="resource"
-            type="me.gr.githubbrowser.vo.Resource" />
+            type="me.gr.githubbrowser.common.Resource" />
 
         <variable
-            name="retry"
-            type="me.gr.githubbrowser.common.RetryCallback" />
+            name="retryClick"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <LinearLayout
-        isGone="@{resource.data!=null}"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="@dimen/margin_default">
+        android:padding="@dimen/margin_default"
+        app:isGone="@{resource.data!=null}">
 
         <ProgressBar
             android:id="@+id/progress_bar"
             style="?android:attr/progressBarStyle"
-            isGone="@{resource.status==Status.LOADING}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_default" />
+            android:layout_margin="@dimen/margin_default"
+            app:isGone="@{resource.status==Status.LOADING}" />
 
         <Button
             android:id="@+id/retry"
-            isGone="@{resource.status==Status.ERROR}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{()->retry.retry()}"
-            android:text="@string/retry" />
+            android:onClick="@{retryClick}"
+            android:text="@string/retry"
+            app:isGone="@{resource.status==Status.ERROR}" />
 
         <TextView
             android:id="@+id/error_text"
-            isGone="@{resource.status==Status.ERROR}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{resource.message??@string/unknown_error}" />
+            android:text="@{resource.message??@string/unknown_error}"
+            app:isGone="@{resource.status==Status.ERROR}" />
     </LinearLayout>
 </layout>
