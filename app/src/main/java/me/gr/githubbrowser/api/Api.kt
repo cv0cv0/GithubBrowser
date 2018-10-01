@@ -10,7 +10,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface Api {
-
     @GET("users/{login}")
     fun getUser(@Path("login") login: String): LiveData<Response<User>>
 

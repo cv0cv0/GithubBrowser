@@ -6,7 +6,6 @@ import java.util.regex.Pattern
 sealed class Response<T> {
 
     companion object {
-
         fun <T> create(error: Throwable): ErrorResponse<T> {
             return ErrorResponse(error.message ?: "unknown error")
         }

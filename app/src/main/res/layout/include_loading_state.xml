@@ -4,7 +4,7 @@
 
     <data>
 
-        <import type="me.gr.githubbrowser.common.Resource" />
+        <import type="me.gr.githubbrowser.common.Resource.Status" />
 
         <variable
             name="resource"
