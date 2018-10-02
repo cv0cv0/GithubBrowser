@@ -1,4 +1,4 @@
-package me.gr.githubbrowser.adapter
+package me.gr.githubbrowser.binding
 
 import android.databinding.BindingAdapter
 import android.view.View

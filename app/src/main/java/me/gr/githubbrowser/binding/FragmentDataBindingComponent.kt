@@ -1,8 +1,7 @@
-package me.gr.githubbrowser.util
+package me.gr.githubbrowser.binding
 
 import android.databinding.DataBindingComponent
 import android.support.v4.app.Fragment
-import me.gr.githubbrowser.adapter.FragmentBindingAdapters
 
 class FragmentDataBindingComponent(fragment: Fragment) : DataBindingComponent {
     private val adapter = FragmentBindingAdapters(fragment)
