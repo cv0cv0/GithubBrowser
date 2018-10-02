@@ -15,7 +15,7 @@
             type="int" />
 
         <variable
-            name="queryText"
+            name="query"
             type="String" />
 
         <variable
@@ -68,7 +68,7 @@
             android:id="@+id/empty_result_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{@string/empty_search_result(queryText)}"
+            android:text="@{@string/empty_search_result(query)}"
             app:isGone="@{!(resource.status==Status.SUCCESS &amp;&amp; resultCount==0)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -76,7 +76,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/repo_list"
+            android:id="@+id/repo_recycler"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/margin_default"

@@ -4,7 +4,25 @@
     app:startDestination="@id/search_fragment">
 
     <fragment
-        android:id="@+id/search_fragment">
+        android:id="@+id/search_fragment"
+        android:name="me.gr.githubbrowser.ui.SearchFragment"
+        android:label="Search">
 
+        <action
+            android:id="@+id/show_repo"
+            app:destination="@id/repo_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/repo_fragment"
+        android:name="me.gr.githubbrowser.ui.RepoFragment"
+        android:label="Repo">
+
+        <argument
+            android:name="owner"
+            app:argType="string" />
+        <argument
+            android:name="name"
+            app:argType="string" />
     </fragment>
 </navigation>

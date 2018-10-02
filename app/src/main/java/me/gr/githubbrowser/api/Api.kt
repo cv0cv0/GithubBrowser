@@ -23,8 +23,8 @@ interface Api {
     fun getContributors(@Path("owner") owner: String, @Path("name") name: String): LiveData<Response<List<Contributor>>>
 
     @GET("search/repositories")
-    fun seachRepos(@Query("q") query: String): LiveData<Response<SearchResponse>>
+    fun searchRepos(@Query("q") query: String): LiveData<Response<SearchResponse>>
 
     @GET("search/repositories")
-    fun seachRepos(@Query("q") query: String, @Query("page") page: Int): Call<SearchResponse>
+    fun searchRepos(@Query("q") query: String, @Query("page") page: Int): Call<SearchResponse>
 }
