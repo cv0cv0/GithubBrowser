@@ -24,5 +24,23 @@
         <argument
             android:name="name"
             app:argType="string" />
+
+        <action
+            android:id="@+id/show_user"
+            app:destination="@id/user_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/user_fragment"
+        android:name="me.gr.githubbrowser.ui.UserFragment"
+        android:label="User">
+
+        <argument
+            android:name="login"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/show_repo"
+            app:destination="@id/repo_fragment" />
     </fragment>
 </navigation>

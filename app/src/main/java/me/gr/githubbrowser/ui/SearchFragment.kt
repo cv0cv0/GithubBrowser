@@ -28,14 +28,14 @@ import javax.inject.Inject
 
 class SearchFragment : Fragment(), Injectable {
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
-    lateinit var executors: AppExecutors
+    private lateinit var executors: AppExecutors
 
-    var dataBindingComponent = FragmentDataBindingComponent(this)
-    var binding by autoCleared<FragmentSearchBinding>()
-    var adapter by autoCleared<RepoListAdapter>()
-    lateinit var viewModel: SearchViewModel
+    private lateinit var viewModel: SearchViewModel
+    private var dataBindingComponent = FragmentDataBindingComponent(this)
+    private var binding by autoCleared<FragmentSearchBinding>()
+    private var adapter by autoCleared<RepoListAdapter>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentSearchBinding.inflate(inflater, container, false, dataBindingComponent)

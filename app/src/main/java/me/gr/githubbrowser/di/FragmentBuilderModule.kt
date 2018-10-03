@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import me.gr.githubbrowser.ui.RepoFragment
 import me.gr.githubbrowser.ui.SearchFragment
+import me.gr.githubbrowser.ui.UserFragment
 
 @Module
 abstract class FragmentBuilderModule {
@@ -13,4 +14,7 @@ abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeRepoFragment(): RepoFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributorUserFragment(): UserFragment
 }

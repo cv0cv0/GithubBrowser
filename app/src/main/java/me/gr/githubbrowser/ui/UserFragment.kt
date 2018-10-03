@@ -9,54 +9,54 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import me.gr.githubbrowser.adapter.ContributorListAdapter
+import me.gr.githubbrowser.adapter.RepoListAdapter
 import me.gr.githubbrowser.binding.FragmentDataBindingComponent
-import me.gr.githubbrowser.databinding.FragmentRepoBinding
+import me.gr.githubbrowser.databinding.FragmentUserBinding
 import me.gr.githubbrowser.di.Injectable
 import me.gr.githubbrowser.util.AppExecutors
 import me.gr.githubbrowser.util.autoCleared
-import me.gr.githubbrowser.viewmodel.RepoViewModel
+import me.gr.githubbrowser.viewmodel.UserViewModel
 import javax.inject.Inject
 
-class RepoFragment : Fragment(), Injectable {
+class UserFragment : Fragment(), Injectable {
     @Inject
     private lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
     private lateinit var executors: AppExecutors
 
-    private lateinit var viewModel: RepoViewModel
+    private lateinit var viewModel: UserViewModel
     private var dataBindingComponent = FragmentDataBindingComponent(this)
-    private var binding by autoCleared<FragmentRepoBinding>()
-    private var adapter by autoCleared<ContributorListAdapter>()
+    private var binding by autoCleared<FragmentUserBinding>()
+    private var adapter by autoCleared<RepoListAdapter>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentRepoBinding.inflate(inflater, container, false, dataBindingComponent)
+        binding = FragmentUserBinding.inflate(inflater, container, false, dataBindingComponent)
         binding.setRetryClick { viewModel.refresh() }
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(RepoViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserViewModel::class.java)
 
-        val params = RepoFragmentArgs.fromBundle(arguments)
-        viewModel.setId(params.owner, params.name)
+        val params = UserFragmentArgs.fromBundle(arguments)
+        viewModel.setLogin(params.login)
 
-        viewModel.repo.observe(this, Observer {
-            binding.repo = it?.data
+        viewModel.user.observe(this, Observer {
+            binding.user = it?.data
             binding.resource = it
         })
 
-        adapter = ContributorListAdapter(dataBindingComponent, executors) {
-            findNavController().navigate(RepoFragmentDirections.showUser(it.login))
+        adapter = RepoListAdapter(dataBindingComponent, executors, false) {
+            findNavController().navigate(UserFragmentDirections.showRepo(it.owner.login, it.name))
         }
-        binding.contributorRecycler.adapter = adapter
-        initContributorList()
+        binding.repoRecycler.adapter = adapter
+        initRepoList()
     }
 
-    private fun initContributorList() {
-        viewModel.contributors.observe(this, Observer {
-            adapter.submitList(it?.data ?: emptyList())
+    private fun initRepoList() {
+        viewModel.repositories.observe(this, Observer {
+            adapter.submitList(it?.data)
         })
     }
 }

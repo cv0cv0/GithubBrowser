@@ -4,7 +4,7 @@ import android.arch.lifecycle.*
 import me.gr.githubbrowser.common.Resource
 import me.gr.githubbrowser.data.Repo
 import me.gr.githubbrowser.repository.RepoRepository
-import me.gr.githubbrowser.util.AbsentLiveData
+import me.gr.githubbrowser.common.AbsentLiveData
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(repoRepository: RepoRepository) : ViewModel() {

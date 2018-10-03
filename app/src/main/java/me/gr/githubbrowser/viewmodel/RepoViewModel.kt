@@ -8,7 +8,7 @@ import me.gr.githubbrowser.common.Resource
 import me.gr.githubbrowser.data.Contributor
 import me.gr.githubbrowser.data.Repo
 import me.gr.githubbrowser.repository.RepoRepository
-import me.gr.githubbrowser.util.AbsentLiveData
+import me.gr.githubbrowser.common.AbsentLiveData
 import javax.inject.Inject
 
 class RepoViewModel @Inject constructor(repository: RepoRepository) : ViewModel() {
@@ -20,7 +20,7 @@ class RepoViewModel @Inject constructor(repository: RepoRepository) : ViewModel(
         it.ifExists { owner, name -> repository.loadContributors(owner, name) }
     }
 
-    fun retry() {
+    fun refresh() {
         val owner = repoId.value?.owner
         val name = repoId.value?.name
         if (owner != null && name != null) {
