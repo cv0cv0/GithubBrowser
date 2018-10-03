@@ -36,7 +36,7 @@
             style="@style/TextAppearance.AppCompat.Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{@string/repo_full_name(repo.owner,repo.name)}"
+            android:text="@{@string/repo_full_name(repo.owner.login,repo.name)}"
             app:isGone="@{repo==null}"
             tools:text="name of the user" />
 
@@ -68,7 +68,8 @@
             android:layout_height="0dp"
             android:layout_marginTop="12dp"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/description_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description_text"
             tools:listitem="@layout/item_contributor" />
     </android.support.constraint.ConstraintLayout>
 </layout>

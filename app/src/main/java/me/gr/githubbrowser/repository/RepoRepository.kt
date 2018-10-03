@@ -152,7 +152,7 @@ class FetchNextSearchPageTask(
     val liveData = MutableLiveData<Resource<Boolean>>()
 
     override fun run() {
-        val current = db.repoDao().search(query).value
+        val current = db.repoDao().findSearchResult(query)
         if (current == null) {
             liveData.postValue(null)
             return

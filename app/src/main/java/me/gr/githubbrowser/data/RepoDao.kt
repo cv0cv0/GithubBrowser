@@ -39,6 +39,9 @@ abstract class RepoDao {
     @Query("select * from searchreult where `query`=:query")
     abstract fun search(query: String): LiveData<SearchReult>
 
+    @Query("select * from searchreult where `query`=:query")
+    abstract fun findSearchResult(query: String): SearchReult?
+
     fun loadOrdered(repoIds: List<Int>): LiveData<List<Repo>> {
         val order = SparseIntArray()
         repoIds.withIndex().forEach {

@@ -44,6 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
+                android:text="@{showFullName?repo.fullName:repo.name}"
                 android:textAppearance="?attr/textAppearanceListItem"
                 app:layout_constraintBaseline_toBaselineOf="@+id/stars_text"
                 app:layout_constraintStart_toEndOf="@+id/stars_text"

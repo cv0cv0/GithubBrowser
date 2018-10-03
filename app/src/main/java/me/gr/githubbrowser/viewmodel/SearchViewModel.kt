@@ -1,10 +1,10 @@
 package me.gr.githubbrowser.viewmodel
 
 import android.arch.lifecycle.*
+import me.gr.githubbrowser.common.AbsentLiveData
 import me.gr.githubbrowser.common.Resource
 import me.gr.githubbrowser.data.Repo
 import me.gr.githubbrowser.repository.RepoRepository
-import me.gr.githubbrowser.common.AbsentLiveData
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(repoRepository: RepoRepository) : ViewModel() {
@@ -45,8 +45,7 @@ class NextPageHandler(private val repository: RepoRepository) : Observer<Resourc
     private var query: String? = null
 
     val loadMoreState = MutableLiveData<LoadMoreState>()
-    var hasMore = false
-        private set
+    private var hasMore = false
 
     init {
         reset()
@@ -95,8 +94,9 @@ class NextPageHandler(private val repository: RepoRepository) : Observer<Resourc
     }
 }
 
-class LoadMoreState(val isRunning: Boolean, val errorMessage: String?) {
+class LoadMoreState(val isRunning: Boolean, private val errorMessage: String?) {
     private var handledError = false
+
     val errorMessageIfNotHandled: String?
         get() {
             if (handledError) return null
