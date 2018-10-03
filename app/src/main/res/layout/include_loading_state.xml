@@ -29,21 +29,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
-            app:isGone="@{resource.status==Status.LOADING}" />
-
-        <Button
-            android:id="@+id/retry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{retryClick}"
-            android:text="@string/retry"
-            app:isGone="@{resource.status==Status.ERROR}" />
+            app:isGone="@{resource.status!=Status.LOADING}" />
 
         <TextView
             android:id="@+id/error_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
             android:text="@{resource.message??@string/unknown_error}"
-            app:isGone="@{resource.status==Status.ERROR}" />
+            app:isGone="@{resource.status!=Status.ERROR}" />
+
+        <Button
+            android:id="@+id/retry_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{retryClick}"
+            android:text="@string/retry"
+            app:isGone="@{resource.status!=Status.ERROR}" />
     </LinearLayout>
 </layout>

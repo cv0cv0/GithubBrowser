@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.Provides
 import me.gr.githubbrowser.api.Api
 import me.gr.githubbrowser.data.AppDatabase
-import me.gr.githubbrowser.util.LiveDataCallAdapterFactory
+import me.gr.githubbrowser.api.LiveDataCallAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="me.gr.githubbrowser.common.Resource.Status" />
+
+        <variable
+            name="repo"
+            type="me.gr.githubbrowser.data.Repo" />
+
+        <variable
+            name="resource"
+            type="me.gr.githubbrowser.common.Resource" />
+
+        <variable
+            name="status"
+            type="Status" />
+
+        <variable
+            name="retryClick"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="12dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="12dp">
+
+        <TextView
+            android:id="@+id/name_text"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/repo_full_name(repo.owner,repo.name)}"
+            app:isGone="@{repo==null}"
+            tools:text="name of the user" />
+
+        <TextView
+            android:id="@+id/description_text"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{repo.description}"
+            app:isGone="@{repo==null}"
+            app:layout_constraintTop_toBottomOf="@id/name_text"
+            tools:text="description if the user" />
+
+        <include
+            layout="@layout/include_loading_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:resource="@{resource}"
+            app:retryClick="@{retryClick}" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/description_text"
+            tools:listitem="@layout/item_contributor" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

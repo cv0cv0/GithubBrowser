@@ -1,7 +1,6 @@
-package me.gr.githubbrowser.util
+package me.gr.githubbrowser.api
 
 import android.arch.lifecycle.LiveData
-import me.gr.githubbrowser.api.Response
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Callback
