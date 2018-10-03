@@ -19,6 +19,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
 import me.gr.githubbrowser.adapter.RepoListAdapter
 import me.gr.githubbrowser.binding.FragmentDataBindingComponent
+import me.gr.githubbrowser.common.OnRetryClickListener
 import me.gr.githubbrowser.databinding.FragmentSearchBinding
 import me.gr.githubbrowser.di.Injectable
 import me.gr.githubbrowser.util.AppExecutors
@@ -28,9 +29,9 @@ import javax.inject.Inject
 
 class SearchFragment : Fragment(), Injectable {
     @Inject
-    private lateinit var viewModelFactory: ViewModelProvider.Factory
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
-    private lateinit var executors: AppExecutors
+    lateinit var executors: AppExecutors
 
     private lateinit var viewModel: SearchViewModel
     private var dataBindingComponent = FragmentDataBindingComponent(this)
@@ -49,8 +50,10 @@ class SearchFragment : Fragment(), Injectable {
             findNavController().navigate(SearchFragmentDirections.ShowRepo(it.owner.login, it.name))
         }
         binding.repoRecycler.adapter = adapter
-        binding.setRetryClick {
-            viewModel.refresh()
+        binding.retryClick = object : OnRetryClickListener {
+            override fun onRetryClick() {
+                viewModel.refresh()
+            }
         }
         initRecyclerView()
         initSearchInputListener()

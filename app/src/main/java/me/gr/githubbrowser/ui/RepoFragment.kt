@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import me.gr.githubbrowser.adapter.ContributorListAdapter
 import me.gr.githubbrowser.binding.FragmentDataBindingComponent
+import me.gr.githubbrowser.common.OnRetryClickListener
 import me.gr.githubbrowser.databinding.FragmentRepoBinding
 import me.gr.githubbrowser.di.Injectable
 import me.gr.githubbrowser.util.AppExecutors
@@ -20,9 +21,9 @@ import javax.inject.Inject
 
 class RepoFragment : Fragment(), Injectable {
     @Inject
-    private lateinit var viewModelFactory: ViewModelProvider.Factory
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
-    private lateinit var executors: AppExecutors
+    lateinit var executors: AppExecutors
 
     private lateinit var viewModel: RepoViewModel
     private var dataBindingComponent = FragmentDataBindingComponent(this)
@@ -31,7 +32,11 @@ class RepoFragment : Fragment(), Injectable {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentRepoBinding.inflate(inflater, container, false, dataBindingComponent)
-        binding.setRetryClick { viewModel.refresh() }
+        binding.retryClick = object : OnRetryClickListener {
+            override fun onRetryClick() {
+                viewModel.refresh()
+            }
+        }
         return binding.root
     }
 

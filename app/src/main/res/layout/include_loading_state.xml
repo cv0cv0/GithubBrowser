@@ -12,7 +12,7 @@
 
         <variable
             name="retryClick"
-            type="android.view.View.OnClickListener" />
+            type="me.gr.githubbrowser.common.OnRetryClickListener" />
     </data>
 
     <LinearLayout
@@ -43,7 +43,7 @@
             android:id="@+id/retry_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{retryClick}"
+            android:onClick="@{()->retryClick.onRetryClick()}"
             android:text="@string/retry"
             app:isGone="@{resource.status!=Status.ERROR}" />
     </LinearLayout>

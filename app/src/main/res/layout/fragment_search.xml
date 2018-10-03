@@ -29,7 +29,7 @@
 
         <variable
             name="retryClick"
-            type="android.view.View.OnClickListener" />
+            type="me.gr.githubbrowser.common.OnRetryClickListener" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -62,7 +62,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:resource="@{resource}"
-            app:retryClick="@{retryClick}" />
+            app:retryClick="@{()->retryClick.onRetryClick()}" />
 
         <TextView
             android:id="@+id/empty_result_text"

@@ -15,7 +15,7 @@
 
         <variable
             name="retryClick"
-            type="android.view.View.OnClickListener" />
+            type="me.gr.githubbrowser.common.OnRetryClickListener" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -55,7 +55,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:resource="@{resource}"
-            app:retryClick="@{retryClick}" />
+            app:retryClick="@{()->retryClick.onRetryClick()}" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/repo_recycler"
