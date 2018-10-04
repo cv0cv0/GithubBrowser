@@ -3,6 +3,7 @@ package me.gr.githubbrowser.repository
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
+import android.util.Log
 import me.gr.githubbrowser.api.*
 import me.gr.githubbrowser.common.AbsentLiveData
 import me.gr.githubbrowser.common.NetworkBoundResource
@@ -40,6 +41,10 @@ class RepoRepository @Inject constructor(
 
             override fun saveCallResult(item: List<Repo>) {
                 repoDao.insertRepos(item)
+            }
+
+            override fun onFetchFailed() {
+                repoListRateLimit.reset(owner)
             }
         }.asLiveData()
     }
@@ -122,7 +127,7 @@ class RepoRepository @Inject constructor(
 
             override fun saveCallResult(item: SearchResponse) {
                 val repoIds = item.items.map { it.id }
-                val searchResult = SearchReult(
+                val searchResult = SearchResult(
                         query = query,
                         repoIds = repoIds,
                         totalCount = item.totalCount,
@@ -134,6 +139,11 @@ class RepoRepository @Inject constructor(
                 }
             }
 
+            override fun processResponse(response: SuccessResponse<SearchResponse>): SearchResponse {
+                val body = response.body
+                body.nextPage = response.nextPage
+                return body
+            }
         }.asLiveData()
     }
 
@@ -172,7 +182,7 @@ class FetchNextSearchPageTask(
                     val ids = arrayListOf<Int>()
                     ids.addAll(current.repoIds)
                     ids.addAll(apiResponse.body.items.map { it.id })
-                    val merged = SearchReult(
+                    val merged = SearchResult(
                             query = query,
                             repoIds = ids,
                             totalCount = apiResponse.body.totalCount,

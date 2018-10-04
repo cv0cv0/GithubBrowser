@@ -34,13 +34,13 @@ abstract class RepoDao {
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insert(result: SearchReult)
+    abstract fun insert(result: SearchResult)
 
-    @Query("select * from searchreult where `query`=:query")
-    abstract fun search(query: String): LiveData<SearchReult>
+    @Query("select * from searchresult where `query`=:query")
+    abstract fun search(query: String): LiveData<SearchResult>
 
-    @Query("select * from searchreult where `query`=:query")
-    abstract fun findSearchResult(query: String): SearchReult?
+    @Query("select * from searchresult where `query`=:query")
+    abstract fun findSearchResult(query: String): SearchResult?
 
     fun loadOrdered(repoIds: List<Int>): LiveData<List<Repo>> {
         val order = SparseIntArray()

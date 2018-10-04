@@ -7,7 +7,7 @@ import timber.log.Timber
 
 @Entity(primaryKeys = ["query"])
 @TypeConverters(Converters::class)
-data class SearchReult(
+data class SearchResult(
         val query: String,
         val repoIds: List<Int>,
         val totalCount: Int,
@@ -29,5 +29,5 @@ class Converters {
     }?.filterNotNull()
 
     @TypeConverter
-    fun intListToString(ints: List<Int>?) = ints?.joinToString(separator = ",")
+    fun intListToString(ints: List<Int>?): String? = ints?.joinToString(separator = ",")
 }

@@ -1,6 +1,7 @@
 package me.gr.githubbrowser.viewmodel
 
 import android.arch.lifecycle.*
+import android.util.Log
 import me.gr.githubbrowser.common.AbsentLiveData
 import me.gr.githubbrowser.common.Resource
 import me.gr.githubbrowser.data.Repo
@@ -73,7 +74,9 @@ class NextPageHandler(private val repository: RepoRepository) : Observer<Resourc
     }
 
     fun queryNextPage(query: String) {
-        if (this.query == query) return
+        if (this.query == query) {
+            return
+        }
         unregister()
         this.query = query
         nextPageLiveDate = repository.searchNextPage(query)

@@ -8,7 +8,7 @@ import android.arch.persistence.room.RoomDatabase
             User::class,
             Repo::class,
             Contributor::class,
-            SearchReult::class
+            SearchResult::class
         ],
         version = 1,
         exportSchema = false
