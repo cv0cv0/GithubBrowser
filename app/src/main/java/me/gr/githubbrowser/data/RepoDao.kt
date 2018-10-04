@@ -44,14 +44,8 @@ abstract class RepoDao {
 
     fun loadOrdered(repoIds: List<Int>): LiveData<List<Repo>> {
         val order = SparseIntArray()
-        repoIds.withIndex().forEach {
-            order.put(it.value, it.index)
-        }
-
-        return Transformations.map(loadById(repoIds)) { repositories ->
-            repositories.sortedBy { order[it.id] }
-            repositories
-        }
+        repoIds.withIndex().forEach { order.put(it.value, it.index) }
+        return Transformations.map(loadById(repoIds)) { repositories -> repositories.sortedBy { order[it.id] } }
     }
 
     @Query("select * from repo where id in (:repoIds)")
